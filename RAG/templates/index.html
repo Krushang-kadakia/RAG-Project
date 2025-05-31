@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RAG Chatbot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>📄 Upload PDF & Chat 🤖</h1>
+
+    {% if message %}
+        <p style="color:green;">{{ message }}</p>
+    {% endif %}
+
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <input type="file" name="files" multiple required>
+        <button type="submit">Upload PDFs</button>
+    </form>
+    
+
+    <hr>
+
+    <h2>💬 Ask a question</h2>
+    <form id="chat-form">
+        <input type="text" name="query" id="query" placeholder="Ask a question..." required>
+        <button type="submit">Send</button>
+    </form>
+
+    <div id="response" style="margin-top: 20px;"></div>
+
+    <script>
+        document.getElementById("chat-form").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const query = document.getElementById("query").value;
+            document.getElementById("response").innerText = "⏳ Thinking...";
+    
+            const res = await fetch("/ask", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: new URLSearchParams({ query })
+            });
+    
+            const data = await res.json();
+            document.getElementById("response").innerText = data.response;
+        });
+    </script>
+    
+    
+</body>
+</html>
