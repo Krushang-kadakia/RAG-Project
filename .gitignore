@@ -1,0 +1,16 @@
+# Ignore virtual environments
+venv/
+RAG/venv/
+
+# Ignore large model files and binaries
+*.dll
+*.lib
+*.exe
+*.gguf
+
+# Ignore Qdrant data
+qdrant_database/
+
+# Python cache
+__pycache__/
+*.log
