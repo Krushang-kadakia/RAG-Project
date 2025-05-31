@@ -1,5 +1,3 @@
-Sure! Here’s a clear, detailed **README.md** template you can add to your RAG project. It covers everything from cloning, setup, dependencies, Qdrant initialization, and running the app.
-
 ---
 
 ````markdown
